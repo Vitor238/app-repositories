@@ -2,6 +2,7 @@ package br.com.dio.app.repositories.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -24,10 +25,13 @@ class RepoListAdapter : ListAdapter<Repo, RepoListAdapter.ViewHolder>(DiffCallba
     inner class ViewHolder(private val binding: ItemRepoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Repo) {
+            binding.tvOwner.text = item.owner.login
             binding.tvRepoName.text = item.name
             binding.tvRepoDescription.text = item.description
+            binding.tvRepoLanguage.isVisible = !item.language.isNullOrBlank()
             binding.tvRepoLanguage.text = item.language
-            binding.chipStar.text = item.stargazersCount.toString()
+            binding.tvStar.text = item.stargazersCount.toString()
+            binding.tvFork.isVisible = item.fork == true
             Glide.with(binding.root.context).load(item.owner.avatarURL).into(binding.ivOwner)
         }
     }

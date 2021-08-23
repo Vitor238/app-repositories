@@ -2,5 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="star_color">#FAFA82</color>
+    <color name="star_color">#FBD43F</color>
+    <color name="github_blue">#006BEA</color>
+    <color name="github_gray">#D1D1D1</color>
 </resources>

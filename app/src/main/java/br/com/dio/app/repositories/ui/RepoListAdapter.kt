@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 
 class RepoListAdapter : ListAdapter<Repo, RepoListAdapter.ViewHolder>(DiffCallback()) {
 
+    var itemClickListener: (String) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemRepoBinding.inflate(inflater, parent, false)
@@ -33,6 +35,9 @@ class RepoListAdapter : ListAdapter<Repo, RepoListAdapter.ViewHolder>(DiffCallba
             binding.tvStar.text = item.stargazersCount.toString()
             binding.tvFork.isVisible = item.fork == true
             Glide.with(binding.root.context).load(item.owner.avatarURL).into(binding.ivOwner)
+            binding.root.setOnClickListener {
+                itemClickListener.invoke(item.htmlURL)
+            }
         }
     }
 }

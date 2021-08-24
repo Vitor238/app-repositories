@@ -3,6 +3,7 @@ package br.com.dio.app.repositories.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import br.com.dio.app.repositories.R
@@ -13,7 +14,8 @@ import br.com.dio.app.repositories.databinding.ActivityMainBinding
 import br.com.dio.app.repositories.presentation.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
+    MenuItem.OnActionExpandListener {
 
     private val dialog by lazy { createProgressDialog() }
     private val viewModel by viewModel<MainViewModel>()
@@ -48,8 +50,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
-        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        val searchMenuItem = menu.findItem(R.id.action_search)
+        val searchView = searchMenuItem.actionView as SearchView
         searchView.setOnQueryTextListener(this)
+        searchMenuItem.setOnActionExpandListener(this)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -65,9 +69,16 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         return false
     }
 
-
     companion object {
         private const val TAG = "TAG"
     }
 
+    override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+        return true
+    }
+
+    override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+        adapter.submitList(null)
+        return true
+    }
 }

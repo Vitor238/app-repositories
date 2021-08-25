@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import br.com.dio.app.repositories.R
@@ -36,15 +37,24 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
             when (it) {
                 is MainViewModel.State.Error -> {
                     dialog.dismiss()
+                    binding.shimmerViewContainer.stopShimmer()
+                    binding.rvRepos.visibility = View.GONE
+                    binding.shimmerViewContainer.visibility = View.GONE
                     createDialog {
                         setMessage(it.error.message)
                     }.show()
                 }
                 MainViewModel.State.Loading -> {
-                    dialog.show()
+                    dialog.dismiss()
+                    binding.rvRepos.visibility = View.GONE
+                    binding.shimmerViewContainer.visibility = View.VISIBLE
+                    binding.shimmerViewContainer.startShimmer()
                 }
                 is MainViewModel.State.Success -> {
                     dialog.dismiss()
+                    binding.shimmerViewContainer.stopShimmer()
+                    binding.rvRepos.visibility = View.VISIBLE
+                    binding.shimmerViewContainer.visibility = View.GONE
                     adapter.submitList(it.list)
                 }
             }

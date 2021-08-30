@@ -3,6 +3,7 @@ package br.com.dio.app.repositories.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.com.dio.app.repositories.R
 import br.com.dio.app.repositories.core.createDialog
@@ -36,11 +37,24 @@ class RepositoryDetailsActivity : AppCompatActivity() {
             when (it) {
                 is RepoViewModel.State.Error -> {
                     dialog.dismiss()
+                    binding.shimmerViewContainer.stopShimmer()
+                    binding.content.visibility = View.GONE
+                    binding.shimmerViewContainer.visibility = View.GONE
                     createDialog {
                         setMessage(it.error.message)
                     }.show()
                 }
+                is RepoViewModel.State.Loading -> {
+                    dialog.dismiss()
+                    binding.content.visibility = View.GONE
+                    binding.shimmerViewContainer.visibility = View.VISIBLE
+                    binding.shimmerViewContainer.startShimmer()
+                }
                 is RepoViewModel.State.Success -> {
+                    dialog.dismiss()
+                    binding.shimmerViewContainer.stopShimmer()
+                    binding.content.visibility = View.VISIBLE
+                    binding.shimmerViewContainer.visibility = View.GONE
                     Glide.with(this).load(it.repo.owner.avatarURL).into(binding.ivOwner)
                     binding.tvRepoName.text = it.repo.name
                     binding.tvOwner.text = it.repo.owner.login
@@ -78,8 +92,6 @@ class RepositoryDetailsActivity : AppCompatActivity() {
                 }
             }
         }
-
-/*        */
     }
 
     private fun setupToolbar() {

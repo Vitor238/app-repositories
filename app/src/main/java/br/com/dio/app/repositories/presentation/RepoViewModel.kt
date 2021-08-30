@@ -8,6 +8,7 @@ import br.com.dio.app.repositories.data.model.Repo
 import br.com.dio.app.repositories.domain.GetRepositoryUseCase
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class RepoViewModel(private val getRepositoryUseCase: GetRepositoryUseCase) :
@@ -19,7 +20,9 @@ class RepoViewModel(private val getRepositoryUseCase: GetRepositoryUseCase) :
     fun getRepo(userName: String, repoName: String) {
         viewModelScope.launch {
             getRepositoryUseCase(Pair(userName, repoName))
-                .catch {
+                .onStart {
+                    _repo.postValue(State.Loading)
+                }.catch {
                     _repo.postValue(State.Error(it))
                 }.collect {
                     _repo.postValue(State.Success(it))
@@ -28,6 +31,7 @@ class RepoViewModel(private val getRepositoryUseCase: GetRepositoryUseCase) :
     }
 
     sealed class State {
+        object Loading : State()
         data class Success(val repo: Repo) : State()
         data class Error(val error: Throwable) : State()
     }

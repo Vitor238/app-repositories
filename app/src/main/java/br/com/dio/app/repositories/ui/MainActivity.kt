@@ -29,8 +29,14 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
 
         setSupportActionBar(binding.toolbar)
         binding.rvRepos.adapter = adapter
-        adapter.itemClickListener = { url ->
-            startActivity(RepositoryActivity.getIntent(this, url))
+        adapter.itemClickListener = { repo ->
+            startActivity(
+                RepositoryDetailsActivity.getIntent(
+                    this,
+                    repo.owner.login ?: "",
+                    repo.name
+                )
+            )
         }
 
         viewModel.repos.observe(this) {

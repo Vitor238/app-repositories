@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.RepositoryDetailsActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@null" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_owner"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_margin="@dimen/layout_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_owner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_half_padding"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_owner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_owner"
+        app:layout_constraintTop_toTopOf="@+id/iv_owner"
+        tools:text="@sample/repositories.json/data/name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_repo_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_owner"
+        app:layout_constraintTop_toBottomOf="@+id/tv_owner"
+        tools:text="@sample/repositories.json/data/name" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_repo_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_owner"
+        app:layout_constraintTop_toBottomOf="@id/tv_repo_name"
+        tools:text="@sample/repositories.json/data/description" />
+
+
+    <TextView
+        android:id="@+id/tv_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:drawablePadding="4dp"
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/ic_star_border"
+        app:layout_constraintStart_toStartOf="@+id/tv_repo_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_description"
+        tools:text="10 estrelas" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_repo_forks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:drawablePadding="4dp"
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/ic_fork"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_star"
+        app:layout_constraintStart_toEndOf="@+id/tv_star"
+        app:layout_constraintTop_toTopOf="@id/tv_star"
+        tools:text="10 forks" />
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/github_gray"
+        app:layout_constraintTop_toBottomOf="@+id/tv_star" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_issues"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_margin="@dimen/layout_padding"
+        app:cardBackgroundColor="@color/github_green"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_issue" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_half_padding"
+        android:text="@string/issues"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_issues"
+        app:layout_constraintEnd_toStartOf="@id/tv_issue_count"
+        app:layout_constraintStart_toEndOf="@+id/cv_issues"
+        app:layout_constraintTop_toTopOf="@+id/cv_issues" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_issue_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_issues"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cv_issues"
+        tools:text="0" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_watchers"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="@dimen/layout_padding"
+        app:cardBackgroundColor="@color/github_yellow"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="@id/cv_issues"
+        app:layout_constraintTop_toBottomOf="@id/cv_issues">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_eye" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_half_padding"
+        android:text="@string/label_watchers"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/cv_watchers"
+        app:layout_constraintEnd_toStartOf="@id/tv_watchers_count"
+        app:layout_constraintStart_toEndOf="@+id/cv_watchers"
+        app:layout_constraintTop_toTopOf="@+id/cv_watchers" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_watchers_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_watchers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cv_watchers"
+        tools:text="0" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_license"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="@dimen/layout_padding"
+        app:cardBackgroundColor="@color/github_red"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="@id/cv_issues"
+        app:layout_constraintTop_toBottomOf="@id/cv_watchers">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_balance" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_half_padding"
+        android:text="@string/label_license"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_license"
+        app:layout_constraintEnd_toStartOf="@id/tv_license_name"
+        app:layout_constraintStart_toEndOf="@+id/cv_license"
+        app:layout_constraintTop_toTopOf="@+id/cv_license" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_license_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_license"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cv_license"
+        tools:text="Apache" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_code"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="@dimen/layout_padding"
+        app:cardBackgroundColor="@color/dark_gray"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="@id/cv_issues"
+        app:layout_constraintTop_toBottomOf="@id/cv_license">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_code" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_see_on_github"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_half_padding"
+        android:text="@string/label_see_on_github"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cv_code"
+        app:layout_constraintTop_toTopOf="@+id/cv_code" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

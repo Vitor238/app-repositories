@@ -2,4 +2,18 @@
     <string name="app_name">App Repositories</string>
     <string name="action_search">Pesquisar</string>
     <string name="label_fork">fork</string>
+    <string name="repositories">Repositórios</string>
+    <string name="issues">Issues</string>
+    <string name="label_watchers">Observadores</string>
+    <string name="label_license">Licença</string>
+    <string name="label_see_on_github">Ver no Github</string>
+    <plurals name="number_of_stars">
+        <item quantity="one">%d estrela</item>
+        <item quantity="other">%d estrelas</item>
+    </plurals>
+    <plurals name="number_of_forks">
+        <item quantity="one">%d bifurcação</item>
+        <item quantity="other">%d bifurcações</item>
+    </plurals>
+
 </resources>

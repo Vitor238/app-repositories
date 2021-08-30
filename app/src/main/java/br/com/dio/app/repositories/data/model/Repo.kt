@@ -11,6 +11,12 @@ data class Repo(
     val language: String?,
     @SerializedName("html_url")
     val htmlURL: String,
-    val description: String,
-    val fork: Boolean?
+    val description: String?,
+    val fork: Boolean?,
+    @SerializedName("forks_count")
+    val forksCount: Long,
+    @SerializedName("open_issues_count")
+    val openIssuesCount: Long,
+    val watchers: Long,
+    val license: License?
 )

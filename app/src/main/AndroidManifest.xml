@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppRepositories">
         <activity
-            android:name=".ui.RepositoryActivity"
+            android:name=".ui.RepositoryDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.WebViewActivity"
             android:exported="true" />
         <activity
             android:name=".ui.MainActivity"
